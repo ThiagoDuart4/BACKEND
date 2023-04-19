@@ -9,8 +9,8 @@ const db = mysql.createConnection({
     host:"198.91.81.11",
     user:"zkkgnjys_admin",
     password:"admin",
-    database: "zkkgnjys_carteira"
-
+    database: "zkkgnjys_carteira",
+    port : "3306"
 });
 
 app.use(express.json());
