@@ -17,7 +17,7 @@ app.use(express.json());
 app.use(cors());
 
 app.get("/todos", (req, res)=>{
-    const q = "SELECT * FROM gastos"
+    const q = "SELECT * FROM carteira_wrappedwar.gastos"
     db.query(q,(err,data)=>{
         if(err) return res.json(err)
         return res.json(data)
