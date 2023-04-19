@@ -6,11 +6,11 @@ const app = express()
 
 
 const db = mysql.createConnection({
-    host:"198.91.81.11",
-    user:"zkkgnjys_admin",
-    password:"admin",
-    database: "zkkgnjys_carteira",
-    port : "3306"
+    host:"ofo.h.filess.io",
+    user:"carteira_wrappedwar",
+    password:"0f6bc4cfe5786e6bbe3ea181686d9bf89d550d2c",
+    database: "carteira_wrappedwar",
+    port : "3307"
 });
 
 app.use(express.json());
