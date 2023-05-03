@@ -13,11 +13,12 @@ const db = mysql.createConnection({
     port : "3307"
 });
 
+
 app.use(express.json());
 app.use(cors());
 
 app.get("/todos", (req, res)=>{
-    const q = "SELECT * FROM carteira_wrappedwar.gastos"
+    const q = "SELECT * FROM gastos"
     db.query(q,(err,data)=>{
         if(err) return res.json(err)
         return res.json(data)
@@ -34,7 +35,7 @@ app.get("/notificacao", (req, res)=>{
 
 
 app.get("/ValorEntrada", (req, res)=>{
-    const q = "SELECT * FROM gastos WHERE tipo = 'entrada'"
+    const q = "SELECT valor FROM gastos WHERE tipo = 'entrada'"
     db.query(q,(err,data)=>{
         if(err) return res.json(err)
         return res.json(data)
@@ -42,7 +43,7 @@ app.get("/ValorEntrada", (req, res)=>{
 })
 
 app.get("/ValorSaida", (req, res)=>{
-    const q = "SELECT * FROM gastos WHERE tipo = 'saida'"
+    const q = "SELECT valor FROM gastos WHERE tipo = 'saida'"
     db.query(q,(err,data)=>{
         if(err) return res.json(err)
         return res.json(data)
@@ -52,7 +53,7 @@ app.get("/ValorSaida", (req, res)=>{
 
 
 app.get("/saida", (req, res)=>{
-    const q = "SELECT SUM(ValorSaida) AS  ValorSaida FROM gastos "
+    const q = "SELECT SUM(valor) AS  ValorSaida FROM gastos WHERE tipo = 'saida' "
     db.query(q,(err,data)=>{
         if(err) return res.json(err)
         return res.json(data)
@@ -61,7 +62,7 @@ app.get("/saida", (req, res)=>{
 
 
 app.get("/entrada", (req, res)=>{
-    const q = "SELECT SUM(ValorEntrada) AS  ValorEntrada FROM gastos "
+    const q = "SELECT SUM(valor) AS  ValorEntrada FROM gastos WHERE tipo = 'entrada' "
     db.query(q,(err,data)=>{
         if(err) return res.json(err)
         return res.json(data)
@@ -71,20 +72,19 @@ app.get("/entrada", (req, res)=>{
 
 
 app.get("/total", (req, res)=>{
-    const q = "SELECT SUM(ValorEntrada) - SUM(ValorSaida) AS ValorTotal FROM gastos"
+    const q = "SELECT ((SELECT sum(valor) FROM gastos WHERE tipo = 'entrada') - (SELECT SUM(valor) from gastos WHERE tipo = 'saida')) as total from gastos group by total"
     db.query(q,(err,data)=>{
         if(err) return res.json(err)
         return res.json(data)
     })
 })
 
-app.post("/gastos", (req,res)=>{
-    const q = "INSERT INTO gastos ( `descricao`, `ValorEntrada`, `ValorSaida`,`tipo`) VALUES (?)"
+app.post("/todos", (req,res)=>{
+    const q = "INSERT INTO gastos ( `descricao`,`valor`,`tipo`) VALUES (?)"
     const values = [
    
         req.body.descricao,
-        req.body.ValorEntrada,
-        req.body.ValorSaida,
+        req.body.Valor,
         req.body.tipo
     ]
 

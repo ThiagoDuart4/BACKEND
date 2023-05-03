@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 23-Fev-2023 às 13:02
--- Versão do servidor: 10.4.27-MariaDB
--- versão do PHP: 8.2.0
+-- Tempo de geração: 03/05/2023 às 15:22
+-- Versão do servidor: 10.4.28-MariaDB
+-- Versão do PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,45 +24,46 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `gastos`
+-- Estrutura para tabela `gastos`
 --
 
 CREATE TABLE `gastos` (
   `id` int(11) NOT NULL,
   `descricao` varchar(100) DEFAULT NULL,
-  `ValorSaida` varchar(100) DEFAULT NULL,
-  `ValorEntrada` varchar(100) DEFAULT NULL,
+  `valor` varchar(30) DEFAULT NULL,
   `total` varchar(100) DEFAULT NULL,
   `tipo` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `gastos`
+-- Despejando dados para a tabela `gastos`
 --
 
-INSERT INTO `gastos` (`id`, `descricao`, `ValorSaida`, `ValorEntrada`, `total`, `tipo`) VALUES
-(62, 'salaruo', '0', '1000', NULL, 'entrada'),
-(63, 'nercado', '900', '', NULL, 'saida');
+INSERT INTO `gastos` (`id`, `descricao`, `valor`, `total`, `tipo`) VALUES
+(97, 'MERCADO', '1300', NULL, 'entrada'),
+(108, 'Mercado', '1000', NULL, 'entrada'),
+(110, 'Salario', '1000', NULL, 'saida'),
+(111, 'MERCADO', '2333', NULL, 'saida');
 
 --
 -- Índices para tabelas despejadas
 --
 
 --
--- Índices para tabela `gastos`
+-- Índices de tabela `gastos`
 --
 ALTER TABLE `gastos`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT de tabelas despejadas
+-- AUTO_INCREMENT para tabelas despejadas
 --
 
 --
 -- AUTO_INCREMENT de tabela `gastos`
 --
 ALTER TABLE `gastos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=112;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
